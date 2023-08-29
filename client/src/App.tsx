@@ -79,8 +79,10 @@ function App() {
       const profileObj = credential ? parseJwt(credential) : null;
 
       //Save user to mongoDB
+      //development - http://localhost:8080/api/v1/users
+      //production - 'https://property-dashboard-h4t0.onrender.com/api/v1/users'
       if(profileObj){
-        const response = await fetch('http://localhost:8080/api/v1/users',{
+        const response = await fetch('https://property-dashboard-h4t0.onrender.com/api/v1/users',{
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -179,10 +181,13 @@ function App() {
           <CssBaseline />
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
           <RefineSnackbarProvider>
-            {/** https://api.fake-rest.refine.dev */}
+            {/** https://api.fake-rest.refine.dev 
+             *  development - http://localhost:8080/api/v1
+             *  production - https://property-dashboard-h4t0.onrender.com/api/v1
+            */}
             <Refine
               dataProvider={{
-                default: dataProvider("http://localhost:8080/api/v1"),
+                default: dataProvider("https://property-dashboard-h4t0.onrender.com/api/v1"),
                 
               }}
               notificationProvider={notificationProvider}
